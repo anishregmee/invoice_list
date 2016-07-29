@@ -38,7 +38,7 @@
                     </tr>
                   </thead>
                   <tbody class="text-center">
-                    @foreach($invoice_future as $invoice)        
+                    @foreach($invoice_reports as $invoice)        
                       	@if(($invoice->invoice_date) >= $date )
                           <tr>
                             <td>{{ $invoice->invoice_id }}</td>

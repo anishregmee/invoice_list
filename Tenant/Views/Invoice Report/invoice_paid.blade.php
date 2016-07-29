@@ -38,7 +38,7 @@
                     </tr>
                   </thead>
                   <tbody class="text-center">
-                    @foreach($invoice_paid as $invoice)        
+                    @foreach($invoice_reports as $invoice)        
                       @if(($invoice->invoice_amount) - ($invoice->amount) === 0)
                         @elseif(($invoice->invoice_date) <= $date )
                           <tr>
