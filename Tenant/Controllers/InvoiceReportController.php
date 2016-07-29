@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Modules\Tenant\Models\Invoice\Invoice;
-use App\Modules\Tenant\Models\Application\CourseApplication;
 use Flash;
 use DB;
 use Carbon\Carbon;
@@ -14,13 +13,14 @@ class InvoiceReportController extends BaseController
 
      public function getInvoiceReportIndex()
     {
-        $invoice_reports = CourseApplication::leftjoin('users', 'users.user_id', '=', 'course_application.user_id')
-            ->leftjoin('persons', 'persons.person_id', '=', 'users.person_id')
+        $invoice_reports = Invoice::leftjoin('student_invoices', 'student_invoices.invoice_id', '=', 'invoices.invoice_id')
+            ->leftjoin('course_application', 'student_invoices.application_id', '=', 'course_application.course_application_id')
+            ->leftjoin('clients', 'clients.client_id', '=', 'course_application.client_id')
+            ->leftjoin('persons', 'persons.person_id', '=', 'clients.person_id')
+            ->leftjoin('users', 'persons.person_id', '=', 'users.person_id')
             ->leftjoin('person_phones', 'persons.person_id', '=', 'person_phones.person_id')
             ->leftjoin('phones', 'person_phones.phone_id', '=', 'phones.phone_id')
-            ->leftjoin('student_invoices', 'student_invoices.application_id', '=', 'course_application.course_application_id')
-            ->leftjoin('invoices', 'invoices.invoice_id', '=', 'student_invoices.invoice_id')
-            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'course_application.course_application_id','users.email','phones.number', 'invoices.invoice_amount', 'invoices.invoice_id','invoices.total_gst', 'invoices.amount', 'invoices.invoice_date'])
+            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'users.email','phones.number','invoices.invoice_amount','invoices.invoice_id','invoices.total_gst','invoices.amount','invoices.invoice_date'])
             ->orderBy('invoices.invoice_id', 'desc')
             ->get();
 
@@ -30,16 +30,16 @@ class InvoiceReportController extends BaseController
      
      public function getInvoicePaid()
     {
-        $invoice_paid = CourseApplication::leftjoin('users', 'users.user_id', '=', 'course_application.user_id')
-            ->leftjoin('persons', 'persons.person_id', '=', 'users.person_id')
+        $invoice_paid = Invoice::leftjoin('student_invoices', 'student_invoices.invoice_id', '=', 'invoices.invoice_id')
+            ->leftjoin('course_application', 'student_invoices.application_id', '=', 'course_application.course_application_id')
+            ->leftjoin('clients', 'clients.client_id', '=', 'course_application.client_id')
+            ->leftjoin('persons', 'persons.person_id', '=', 'clients.person_id')
+            ->leftjoin('users', 'persons.person_id', '=', 'users.person_id')
             ->leftjoin('person_phones', 'persons.person_id', '=', 'person_phones.person_id')
             ->leftjoin('phones', 'person_phones.phone_id', '=', 'phones.phone_id')
-            ->leftjoin('student_invoices', 'student_invoices.application_id', '=', 'course_application.course_application_id')
-            ->leftjoin('invoices', 'invoices.invoice_id', '=', 'student_invoices.invoice_id')
-            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'course_application.course_application_id','users.email','phones.number', 'invoices.invoice_amount', 'invoices.invoice_id','invoices.total_gst', 'invoices.amount', 'invoices.invoice_date'])
+            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'users.email','phones.number','invoices.invoice_amount','invoices.invoice_id','invoices.total_gst','invoices.amount','invoices.invoice_date'])
             ->orderBy('invoices.invoice_id', 'desc')
             ->get();
-
         $date = Carbon::now();
 
         return view("Tenant::Invoice Report/invoice_paid",['invoice_paid'=>$invoice_paid, 'date'=>$date]);
@@ -49,13 +49,14 @@ class InvoiceReportController extends BaseController
 
     public function getInvoicefuture()
     {
-        $invoice_future = CourseApplication::leftjoin('users', 'users.user_id', '=', 'course_application.user_id')
-            ->leftjoin('persons', 'persons.person_id', '=', 'users.person_id')
+        $invoice_future = Invoice::leftjoin('student_invoices', 'student_invoices.invoice_id', '=', 'invoices.invoice_id')
+            ->leftjoin('course_application', 'student_invoices.application_id', '=', 'course_application.course_application_id')
+            ->leftjoin('clients', 'clients.client_id', '=', 'course_application.client_id')
+            ->leftjoin('persons', 'persons.person_id', '=', 'clients.person_id')
+            ->leftjoin('users', 'persons.person_id', '=', 'users.person_id')
             ->leftjoin('person_phones', 'persons.person_id', '=', 'person_phones.person_id')
             ->leftjoin('phones', 'person_phones.phone_id', '=', 'phones.phone_id')
-            ->leftjoin('student_invoices', 'student_invoices.application_id', '=', 'course_application.course_application_id')
-            ->leftjoin('invoices', 'invoices.invoice_id', '=', 'student_invoices.invoice_id')
-            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'course_application.course_application_id','users.email','phones.number', 'invoices.invoice_amount', 'invoices.invoice_id','invoices.total_gst', 'invoices.amount', 'invoices.invoice_date'])
+            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'users.email','phones.number','invoices.invoice_amount','invoices.invoice_id','invoices.total_gst','invoices.amount','invoices.invoice_date'])
             ->orderBy('invoices.invoice_id', 'desc')
             ->get();
 

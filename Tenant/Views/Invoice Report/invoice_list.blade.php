@@ -24,8 +24,9 @@
               <section>
                 <table class="table table-striped table-bordered table-condensed" id="invoice_report_table">
                   <thead>
-                    <tr class="text-nowrap">
+                    <tr>
                       <th>Invoice Id</th>
+                      <th>Invoice Date</th>
                       <th>Client Name</th>
                       <th>Phone</th>
                       <th>Email</th>
@@ -36,10 +37,11 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody class="text-center">
                     @foreach($invoice_reports as $invoice_report)        
                       <tr>
                         <td>{{ $invoice_report->invoice_id }}</td>
+                        <td>{{ date('M j, Y', strtotime($invoice_report->invoice_date)) }}</td>
                         <td>{{ $invoice_report->fullname }}</td>
                         <td>{{ $invoice_report->number }}</td>
                         <td>{{ $invoice_report->email }}</td>
@@ -55,10 +57,10 @@
                           @endif
                         </td>
                         <td>
-                          <a href="#" title="Add Payment"><i class=" btn btn-primary btn-sm glyphicon glyphicon-shopping-cart" data-toggle="tooltip" data-placement="top" title="Add Payment"></i></a>
-                          <a href="#" title="Print Invoice"><i class="processing btn btn-primary btn-sm glyphicon glyphicon-print" data-toggle="tooltip" data-placement="top" title="Print Invoice"></i></a>
-                          <a href="#" title="View Invoice"><i class="processing btn btn-primary btn-sm glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="View Invoice"></i></a>
-                          <a href="#" title="Email Invoice"><i class="processing btn btn-primary btn-sm glyphicon glyphicon-send" data-toggle="tooltip" data-placement="top" title="Email Invoice"></i></a>
+                          <a href="#" title="Add Payment"><i class=" btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" data-toggle="tooltip" data-placement="top" title="Add Payment"></i></a>
+                          <a href="#" title="Print Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-print" data-toggle="tooltip" data-placement="top" title="Print Invoice"></i></a>
+                          <a href="#" title="View Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="View Invoice"></i></a>
+                          <a href="#" title="Email Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-send" data-toggle="tooltip" data-placement="top" title="Email Invoice"></i></a>
                         </td>
                       </tr>
                     @endforeach
@@ -77,6 +79,7 @@
             "columns": 
             [
                 {data: 'invoice_id', name: 'invoice_id'},
+                {data: 'invoice_date', name: 'invoice_date'},
                 {data: 'fullname', name: 'fullname'},
                 {data: 'number', name: 'number'},
                 {data: 'email', name: 'email'},
