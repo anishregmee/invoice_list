@@ -15,9 +15,9 @@
       <ul class="nav navbar-nav">
         <li><a href="#">Outstanding</a></li>
         
-        <li><a href="#">Paid Invoices</a></li>
+        <li class="{{ Request::is('tenant/invoice_report/invoice_paid') ? 'active' : '' }}"><a href="{{ route('invoice.paid') }}">Paid Invoices</a></li>
         
-        <li><a href="#">Future Invoices</a></li>
+        <li class="{{ Request::is('tenant/invoice_report/invoice_future') ? 'active' : '' }}"><a href="{{ route('invoice.future') }}">Future Invoices</a></li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->

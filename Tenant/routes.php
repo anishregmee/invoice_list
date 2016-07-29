@@ -232,6 +232,8 @@ Route::group(array('prefix' => 'tenant', 'module' => 'Tenant', 'middleware' => '
 
     /*Routes for Invoice Reports All goes to InvoiceReportController*/
     Route::get('invoice_report/invoice_list', ['as'=>'invoice.list.index', 'uses'=>'InvoiceReportController@getInvoiceReportIndex']);
+    Route::get('invoice_report/invoice_paid', ['as'=>'invoice.paid', 'uses'=>'InvoiceReportController@getInvoicePaid']);
+    Route::get('invoice_report/invoice_future', ['as'=>'invoice.future', 'uses'=>'InvoiceReportController@getInvoicefuture']);
 
 
 
