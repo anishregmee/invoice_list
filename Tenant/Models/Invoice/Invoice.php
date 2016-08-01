@@ -38,12 +38,11 @@ class Invoice extends Model
             ->leftjoin('users', 'persons.person_id', '=', 'users.person_id')
             ->leftjoin('person_phones', 'persons.person_id', '=', 'person_phones.person_id')
             ->leftjoin('phones', 'person_phones.phone_id', '=', 'phones.phone_id')
-            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'users.email','phones.number','invoices.invoice_amount','invoices.invoice_id','invoices.total_gst','invoices.amount','invoices.invoice_date'])
+            ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'users.email','phones.number','invoices.invoice_amount','invoices.invoice_id','invoices.total_gst','invoices.amount','invoices.invoice_date','client_payments.amount as total_paid'])
             ->orderBy('invoices.invoice_id', 'desc')
             ->get();
 
         return $invoice_reports;
     }
-
 
 }

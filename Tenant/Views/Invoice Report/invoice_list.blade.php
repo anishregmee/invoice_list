@@ -38,22 +38,22 @@
                     </tr>
                   </thead>
                   <tbody class="text-center">
-                    @foreach($invoice_reports as $invoice_report)        
+                    @foreach($invoice_reports as $invoice)        
                       <tr>
-                        <td>{{ $invoice_report->invoice_id }}</td>
-                        <td>{{ date('M j, Y', strtotime($invoice_report->invoice_date)) }}</td>
-                        <td>{{ $invoice_report->fullname }}</td>
-                        <td>{{ $invoice_report->number }}</td>
-                        <td>{{ $invoice_report->email }}</td>
-                        <td>{{ $invoice_report->invoice_amount }}</td>
-                        <td>{{ $invoice_report->total_gst }}</td>
-                        <td>{{ (($invoice_report->invoice_amount) - ($invoice_report->amount) <= 0) ? 'paid' : 'pending' }}</td>
+                        <td>{{ $invoice->invoice_id }}</td>
+                        <td>{{ date('M j, Y', strtotime($invoice->invoice_date)) }}</td>
+                        <td>{{ $invoice->fullname }}</td>
+                        <td>{{ $invoice->number }}</td>
+                        <td>{{ $invoice->email }}</td>
+                        <td>{{ $invoice->invoice_amount }}</td>
+                        <td>{{ $invoice->total_gst }}</td>
+                        <td>{{ (($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst) <= 0) ? 'paid' : 'pending' }}</td>
                         <td>
-                          @if(($invoice_report->invoice_amount) - ($invoice_report->amount) == 0)
-                              {{ '-' }}
-                            @elseif(($invoice_report->invoice_amount) - ($invoice_report->amount) != 0)
-                              {{ (($invoice_report->invoice_amount) - ($invoice_report->amount)) }}
-                            @else
+                          @if(($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst) === 0)
+                                  {{ '-' }}
+                              @elseif(($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst) != 0)
+                                  {{ (($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst)) }}
+                              @else
                           @endif
                         </td>
                         <td>
