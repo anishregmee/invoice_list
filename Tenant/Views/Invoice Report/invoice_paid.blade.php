@@ -40,7 +40,7 @@
                   <tbody class="text-center">
                     @foreach($invoice_reports as $invoice)        
                       @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) === 0)
-                        @elseif(($invoice->invoice_date) <= $date )
+                        && (($invoice->invoice_date) <= $date )
                           <tr>
                             <td>{{ $invoice->invoice_id }}</td>
                             <td>{{ date('M j, Y', strtotime($invoice->invoice_date)) }}</td>
@@ -49,7 +49,7 @@
                             <td>{{ $invoice->email }}</td>
                             <td>{{ $invoice->invoice_amount }}</td>
                             <td>{{ $invoice->total_gst }}</td>
-                            <td>{{ (($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst) <= 0) ? 'paid' : 'pending' }}</td>
+                            <td>{{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) <= 0) ? 'paid' : 'pending' }}</td>
                             <td>
                               @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) === 0)
                                   {{ '-' }}
@@ -65,7 +65,6 @@
                               <a href="#" title="Email Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-send" data-toggle="tooltip" data-placement="top" title="Email Invoice"></i></a>
                             </td>
                           </tr>
-                        @else
                       @endif
                     @endforeach
                   </tbody>
