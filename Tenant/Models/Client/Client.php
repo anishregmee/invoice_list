@@ -188,4 +188,6 @@ class Client extends Model
             ->first();
         return $client;
     }
+
+    
 }

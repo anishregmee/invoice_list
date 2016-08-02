@@ -13,7 +13,7 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li class="{{ Request::is('tenant/invoice_report/invoice_list') ? 'active' : '' }}"><a href="{{ route('invoice.list.index') }}">Invoices</a></li>
+        <li class="{{ Request::is('tenant/invoice_report/invoice_list') ? 'active' : '' }}"><a href="{{ route('invoice.list.index') }}">Pending Invoices</a></li>
         
         <li class="{{ Request::is('tenant/invoice_report/invoice_paid') ? 'active' : '' }}"><a href="{{ route('invoice.paid') }}">Paid Invoices</a></li>
         

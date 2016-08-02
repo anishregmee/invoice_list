@@ -2,7 +2,6 @@
 
 use App\Http\Requests;
 use App\Modules\Tenant\Models\Invoice\Invoice;
-use App\Modules\Tenant\Models\Client\ClientPayment;
 use Flash;
 use DB;
 use Carbon\Carbon;
@@ -18,16 +17,16 @@ class InvoiceReportController extends BaseController
         parent::__construct();
     }
 
-    public function getInvoiceReportindex()
+    public function getInvoicePending()
     {
-        $data['invoice_reports'] = $this->Invoice->getDetails();
+        $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
 
         return view("Tenant::Invoice Report/invoice_list",$data);
     }
 
      public function getInvoicePaid()
     {
-        $data['invoice_reports'] = $this->Invoice->getDetails();
+        $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
         
         $data['date'] = Carbon::now();      
                       
@@ -38,7 +37,7 @@ class InvoiceReportController extends BaseController
 
     public function getInvoiceFuture()
     {
-        $data['invoice_reports'] = $this->Invoice->getDetails();
+        $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
         
         $data['date'] = Carbon::now();
 

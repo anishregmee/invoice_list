@@ -27,15 +27,13 @@ class Invoice extends Model
      */
     protected $fillable = ['amount', 'discount', 'invoice_date', 'invoice_amount', 'description', 'due_date'];
 
-    function getDetails()
+     function getInvoiceDetails()
     {
-         $invoice_reports = Invoice::leftjoin('student_invoices', 'student_invoices.invoice_id', '=', 'invoices.invoice_id')
-            ->leftjoin('course_application', 'student_invoices.application_id', '=', 'course_application.course_application_id')
-            ->leftjoin('clients', 'clients.client_id', '=', 'course_application.client_id')
-            ->leftjoin('payment_invoice_breakdowns', 'payment_invoice_breakdowns.invoice_id', '=', 'invoices.invoice_id')
+         $invoice_reports = Invoice::leftjoin('payment_invoice_breakdowns', 'payment_invoice_breakdowns.invoice_id', '=', 'invoices.invoice_id')
             ->leftjoin('client_payments', 'client_payments.client_payment_id', '=', 'payment_invoice_breakdowns.payment_id')
+            ->leftjoin('clients', 'clients.client_id', '=', 'client_payments.client_id')
             ->leftjoin('persons', 'persons.person_id', '=', 'clients.person_id')
-            ->leftjoin('users', 'persons.person_id', '=', 'users.person_id')
+            ->leftjoin('users', 'clients.user_id', '=', 'users.user_id')
             ->leftjoin('person_phones', 'persons.person_id', '=', 'person_phones.person_id')
             ->leftjoin('phones', 'person_phones.phone_id', '=', 'phones.phone_id')
             ->select([DB::raw('CONCAT(persons.first_name, " ", persons.last_name) AS fullname'),'users.email','phones.number','invoices.invoice_amount','invoices.invoice_id','invoices.total_gst','invoices.amount','invoices.invoice_date','client_payments.amount as total_paid'])
@@ -44,5 +42,6 @@ class Invoice extends Model
 
         return $invoice_reports;
     }
+
 
 }
