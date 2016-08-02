@@ -47,7 +47,7 @@
                         <td>{{ $invoice->invoice_amount }}</td>
                         <td>{{ $invoice->total_gst }}</td>
                         <td>
-                          @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid)  === 0)
+                          @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) <= 0)
                                   {{ '-' }}
                               @elseif(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) != 0)
                                   {{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid)) }}
