@@ -44,5 +44,4 @@ class Invoice extends Model
 
         return $invoice_reports;
     }
-
 }

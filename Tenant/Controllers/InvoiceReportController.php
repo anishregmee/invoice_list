@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Modules\Tenant\Models\Invoice\Invoice;
+use App\Modules\Tenant\Models\Client\ClientPayment;
 use Flash;
 use DB;
 use Carbon\Carbon;
@@ -28,8 +29,8 @@ class InvoiceReportController extends BaseController
     {
         $data['invoice_reports'] = $this->Invoice->getDetails();
         
-        $data['date'] = Carbon::now();
-        
+        $data['date'] = Carbon::now();      
+                      
         return view("Tenant::Invoice Report/invoice_paid",$data);
 
     }

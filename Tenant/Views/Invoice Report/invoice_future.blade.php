@@ -48,12 +48,12 @@
                             <td>{{ $invoice->email }}</td>
                             <td>{{ $invoice->invoice_amount }}</td>
                             <td>{{ $invoice->total_gst }}</td>
-                            <td>{{ (($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst) <= 0) ? 'paid' : 'pending' }}</td>
+                            <td>{{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) === 0) ? 'paid' : 'pending' }}</td>
                             <td>
                               @if(($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst) === 0)
                                   {{ '-' }}
-                                @elseif(($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst) != 0)
-                                  {{ (($invoice->total_paid) - ($invoice->invoice_amount + $invoice->total_gst)) }}
+                                @elseif(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) != 0)
+                                  {{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid)) }}
                                 @else
                               @endif
                             </td>
