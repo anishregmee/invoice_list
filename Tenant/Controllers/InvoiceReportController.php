@@ -28,7 +28,7 @@ class InvoiceReportController extends BaseController
     {
         $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
         
-        $data['date'] = Carbon::now();      
+        $data['date'] = Carbon::now();     
                       
         return view("Tenant::Invoice Report/invoice_paid",$data);
 

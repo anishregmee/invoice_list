@@ -37,7 +37,7 @@
                     </tr>
                   </thead>
                   <tbody class="text-center">
-                    @foreach($invoice_reports as $invoice)        
+                    @foreach($invoice_reports as $invoice)       
                       <tr>
                         <td>{{ $invoice->invoice_id }}</td>
                         <td>{{ date('M j, Y', strtotime($invoice->invoice_date)) }}</td>
