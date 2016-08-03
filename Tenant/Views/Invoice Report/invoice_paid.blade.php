@@ -38,8 +38,7 @@
                   </thead>
                   <tbody class="text-center">
                     @foreach($invoice_reports as $invoice)        
-                      @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) === 0)
-                        && (($invoice->invoice_date) <= $date )
+                      @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) <= 0 && ($invoice->invoice_date) <= $date )
                           <tr>
                             <td>{{ $invoice->invoice_id }}</td>
                             <td>{{ date('M j, Y', strtotime($invoice->invoice_date)) }}</td>
@@ -48,9 +47,8 @@
                             <td>{{ $invoice->email }}</td>
                             <td>{{ $invoice->invoice_amount }}</td>
                             <td>{{ $invoice->total_gst }}</td>
-                            <td>{{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) <= 0) ? 'paid' : 'pending' }}</td>
                             <td>
-                              @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) === 0)
+                              @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) <= 0)
                                   {{ '-' }}
                                 @elseif(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) != 0)
                                   {{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid)) }}
@@ -96,6 +94,7 @@
 </script>
 @stop
                       
+                        
 
                       
                             
