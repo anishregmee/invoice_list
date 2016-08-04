@@ -22,7 +22,7 @@
           <div class="box box-primary">
             <div class="box-body">
               <section>
-                <table class="table table-striped table-bordered table-condensed" id="invoice_report_table">
+                <table class="table table-striped table-bordered table-condensed text-center", id="invoice_report_table">
                   <thead>
                     <tr>
                       <th>Invoice Id</th>
@@ -37,7 +37,7 @@
                       <th></th>
                     </tr>
                   </thead>
-                  <tbody class="text-center">
+                  <tbody>
                     @foreach($invoice_reports as $invoice)        
                       	@if(($invoice->invoice_date) >= $date )
                           <tr>

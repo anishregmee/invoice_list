@@ -30,7 +30,7 @@ class Invoice extends Model
 
      function getInvoiceDetails()
     {
-         $invoice_reports = Invoice::leftjoin('payment_invoice_breakdowns', 'payment_invoice_breakdowns.invoice_id', '=', 'invoices.invoice_id')
+        $invoice_reports = Invoice::leftjoin('payment_invoice_breakdowns', 'payment_invoice_breakdowns.invoice_id', '=', 'invoices.invoice_id')
             ->leftjoin('client_payments', 'client_payments.client_payment_id', '=', 'payment_invoice_breakdowns.payment_id')
             ->leftjoin('clients', 'clients.client_id', '=', 'client_payments.client_id')
             ->leftjoin('persons', 'persons.person_id', '=', 'clients.person_id')
@@ -42,9 +42,9 @@ class Invoice extends Model
             ->orderBy('invoices.invoice_id', 'desc')
             ->get();
 
-            return $invoice_reports;
-        
+        return $invoice_reports;
     }
+        
 
     function getDate()
     {

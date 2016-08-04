@@ -25,15 +25,15 @@ class InvoiceReportController extends BaseController
         return view("Tenant::Invoice Report/invoice_pending",$data);
     }
 
-     public function getInvoicePaid()
+    public function getInvoicePaid()
     {
         $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
         
         $data['date'] = $this->Invoice->getDate(); 
                       
         return view("Tenant::Invoice Report/invoice_paid",$data);
-
     }
+
              
 
     public function getInvoiceFuture()
