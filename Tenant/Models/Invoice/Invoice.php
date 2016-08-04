@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use DB;
+use Carbon\Carbon;
 
 class Invoice extends Model
 {
@@ -41,7 +42,16 @@ class Invoice extends Model
             ->orderBy('invoices.invoice_id', 'desc')
             ->get();
 
-        return $invoice_reports;
+            return $invoice_reports;
+        
     }
+
+    function getDate()
+    {
+        $date = Carbon::now();
+
+        return $date;
+    }
+
 
 }

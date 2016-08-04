@@ -37,30 +37,32 @@
                     </tr>
                   </thead>
                   <tbody class="text-center">
-                    @foreach($invoice_reports as $invoice)       
-                      <tr>
-                        <td>{{ $invoice->invoice_id }}</td>
-                        <td>{{ date('M j, Y', strtotime($invoice->invoice_date)) }}</td>
-                        <td>{{ $invoice->fullname }}</td>
-                        <td>{{ $invoice->number }}</td>
-                        <td>{{ $invoice->email }}</td>
-                        <td>{{ $invoice->invoice_amount }}</td>
-                        <td>{{ $invoice->total_gst }}</td>
-                        <td>
-                          @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) <= 0)
-                                  {{ '-' }}
-                              @elseif(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) != 0)
-                                  {{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid)) }}
-                              @else
-                          @endif
-                        </td>
-                        <td>
-                          <a href="#" title="Add Payment"><i class=" btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" data-toggle="tooltip" data-placement="top" title="Add Payment"></i></a>
-                          <a href="#" title="Print Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-print" data-toggle="tooltip" data-placement="top" title="Print Invoice"></i></a>
-                          <a href="#" title="View Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="View Invoice"></i></a>
-                          <a href="#" title="Email Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-send" data-toggle="tooltip" data-placement="top" title="Email Invoice"></i></a>
-                        </td>
-                      </tr>
+                    @foreach($invoice_reports as $invoice)
+                      @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) > 0 && ($invoice->invoice_date) <= $date )       
+                        <tr>
+                          <td>{{ $invoice->invoice_id }}</td>
+                          <td>{{ date('M j, Y', strtotime($invoice->invoice_date)) }}</td>
+                          <td>{{ $invoice->fullname }}</td>
+                          <td>{{ $invoice->number }}</td>
+                          <td>{{ $invoice->email }}</td>
+                          <td>{{ $invoice->invoice_amount }}</td>
+                          <td>{{ $invoice->total_gst }}</td>
+                          <td>
+                            @if(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) <= 0)
+                                    {{ '-' }}
+                                @elseif(($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid) != 0)
+                                    {{ (($invoice->invoice_amount + $invoice->total_gst) - ($invoice->total_paid)) }}
+                                @else
+                            @endif
+                          </td>
+                          <td>
+                            <a href="#" title="Add Payment"><i class=" btn btn-primary btn-xs glyphicon glyphicon-shopping-cart" data-toggle="tooltip" data-placement="top" title="Add Payment"></i></a>
+                            <a href="#" title="Print Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-print" data-toggle="tooltip" data-placement="top" title="Print Invoice"></i></a>
+                            <a href="#" title="View Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-eye-open" data-toggle="tooltip" data-placement="top" title="View Invoice"></i></a>
+                            <a href="#" title="Email Invoice"><i class="processing btn btn-primary btn-xs glyphicon glyphicon-send" data-toggle="tooltip" data-placement="top" title="Email Invoice"></i></a>
+                          </td>
+                        </tr>
+                      @endif
                     @endforeach
                   </tbody>
                 </table>

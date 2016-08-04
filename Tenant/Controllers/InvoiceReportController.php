@@ -4,7 +4,6 @@ use App\Http\Requests;
 use App\Modules\Tenant\Models\Invoice\Invoice;
 use Flash;
 use DB;
-use Carbon\Carbon;
 
 use Illuminate\Http\Request;
 
@@ -21,14 +20,16 @@ class InvoiceReportController extends BaseController
     {
         $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
 
-        return view("Tenant::Invoice Report/invoice_list",$data);
+        $data['date'] = $this->Invoice->getDate();
+
+        return view("Tenant::Invoice Report/invoice_pending",$data);
     }
 
      public function getInvoicePaid()
     {
         $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
         
-        $data['date'] = Carbon::now();     
+        $data['date'] = $this->Invoice->getDate(); 
                       
         return view("Tenant::Invoice Report/invoice_paid",$data);
 
@@ -39,7 +40,7 @@ class InvoiceReportController extends BaseController
     {
         $data['invoice_reports'] = $this->Invoice->getInvoiceDetails();
         
-        $data['date'] = Carbon::now();
+        $data['date'] = $this->Invoice->getDate();
 
         return view("Tenant::Invoice Report/invoice_future",$data);
     }
